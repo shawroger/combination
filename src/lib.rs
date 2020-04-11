@@ -1,12 +1,9 @@
 //!  # What it is
-//!  math_permutation is a lib to do math jobs
+//!  combination is a lib to do math jobs like permutate and combinate data from vec.
 //!
-//!  it can do something like permutation and combination.
-//!
-//!   ```rust
-//!
-//! extern crate math_permutation;
-//! use math_permutation::permutation::*;
+//! ```rust
+//! extern crate combination;
+//! use combination::permutate::*;
 //!
 //! #[test]
 //! #[cfg(test)]
@@ -20,7 +17,7 @@
 //! ```
 //!
 //!
-//! 
+//!
 #![crate_name = "combination"]
 #![deny(warnings)]
 #[allow(dead_code)]
@@ -86,22 +83,23 @@ pub mod combine {
     ///
     /// * for example
     /// ``` rust
-    /// let val = combination_vec(&vec![10, 20, 30, 40], 2);
+    /// extern crate combination;
+    /// use combination::combine::*;
+    /// let val = combine_vec(&vec![10, 20, 30, 40], 2);
     /// for item in val {
     ///     println!("{:?}", item);
     /// }
     /// ```
-    /// 
+    ///
     /// * and will get:
-    /// 
-    ///``` rust
+    ///
     /// [10, 20]
     /// [10, 30]
     /// [10, 40]
     /// [20, 30]
     /// [20, 40]
     /// [30, 40]
-    /// ```
+    /// 
     pub fn combine_vec<T: Clone + Copy>(target_vec: &Vec<T>, combine_len: usize) -> Vec<Vec<T>> {
         let mut result: Vec<Vec<T>> = Vec::new();
         let permutate_vec = get_combination(target_vec.len(), combine_len);
@@ -147,15 +145,17 @@ pub mod permutate {
     ///
     /// * for example
     /// ``` rust
+    /// extern crate combination;
+    /// use combination::permutate::*;
     /// let val = permutate_vec(&vec![10, 20, 30, 40]);
     /// for item in val {
     ///     println!("{:?}", item);
     /// }
     /// ```
-    /// 
+    ///
     /// * and will get:
+    ///
     /// 
-    /// ``` rust
     /// [30, 10, 40, 20]
     /// [30, 10, 20, 40]
     /// [40, 10, 30, 20]
@@ -178,7 +178,7 @@ pub mod permutate {
     /// [20, 40, 10, 30]
     /// [20, 10, 40, 30]
     /// [20, 10, 30, 40]
-    /// ```
+    /// 
 
     pub fn permutate_vec<T: Clone + Copy>(target_vec: &Vec<T>) -> Vec<Vec<T>> {
         let mut result: Vec<Vec<T>> = Vec::new();
