@@ -1,6 +1,6 @@
 [package]
 name = "combination"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["shawroger <roger@shawroger.com>"]
 edition = "2018"
 description = "A lib to do math jobs like permutate and combinate data from vec."

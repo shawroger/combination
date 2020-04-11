@@ -29,7 +29,7 @@ fn get_example_vec(size: usize) -> Vec<usize> {
     provide_temp
 }
 
-fn map_from_vec<T: Clone + Copy>(target_vec: &Vec<T>, map_from_vec: &Vec<usize>) -> Vec<T> {
+fn map_from_vec<T: Copy>(target_vec: &Vec<T>, map_from_vec: &Vec<usize>) -> Vec<T> {
     let mut result: Vec<T> = Vec::new();
     let target_vec_owned = target_vec.to_vec();
 
@@ -100,7 +100,7 @@ pub mod combine {
     /// [20, 40]
     /// [30, 40]
     /// 
-    pub fn combine_vec<T: Clone + Copy>(target_vec: &Vec<T>, combine_len: usize) -> Vec<Vec<T>> {
+    pub fn combine_vec<T: Copy>(target_vec: &Vec<T>, combine_len: usize) -> Vec<Vec<T>> {
         let mut result: Vec<Vec<T>> = Vec::new();
         let permutate_vec = get_combination(target_vec.len(), combine_len);
         for item in &permutate_vec {
@@ -180,7 +180,7 @@ pub mod permutate {
     /// [20, 10, 30, 40]
     /// 
 
-    pub fn permutate_vec<T: Clone + Copy>(target_vec: &Vec<T>) -> Vec<Vec<T>> {
+    pub fn permutate_vec<T: Copy>(target_vec: &Vec<T>) -> Vec<Vec<T>> {
         let mut result: Vec<Vec<T>> = Vec::new();
         let permutate_vec = get_permutation(target_vec.len());
         for item in &permutate_vec {
