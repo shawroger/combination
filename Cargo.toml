@@ -1,11 +1,11 @@
 [package]
 name = "combination"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["shawroger <roger@shawroger.com>"]
 edition = "2018"
-description = "JSON implementation in Rust"
+description = "A lib to do math jobs like permutate and combinate data from vec."
 repository = "https://github.com/shawroger/combination.git"
-documentation = "https://docs.rs/json/"
+documentation = "https://docs.rs/combination/"
 license = "MIT/Apache-2.0"
 
 [dependencies]
