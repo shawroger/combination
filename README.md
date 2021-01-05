@@ -30,9 +30,8 @@ Get combination data from a vec
 - for example
 
 ```rust
-extern crate combination;
-use combination::combine::*;
-let val = combine_vec(&vec![10, 20, 30, 40], 2);
+use combination::*;
+let val = combine(&vec![10, 20, 30, 40], 2);
 for item in val {
     println!("{:?}", item);
 }
