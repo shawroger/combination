@@ -18,6 +18,7 @@
     @Command("git push origin master")
 
     @Println("Deploy is done")
+    @Println("")
 
     // publish to crates.index
     @Println("Publish to crates")
