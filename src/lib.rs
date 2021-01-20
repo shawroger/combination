@@ -98,6 +98,34 @@ pub fn combine<T: Clone>(target_vec: &Vec<T>, combine_len: usize) -> Vec<Vec<T>>
     result
 }
 
+/// Get all combination result from a vec
+///
+/// * for example
+/// ``` rust
+/// use combination::*;
+/// let val = combine_all(&vec![10, 20, 30]);
+/// for item in val {
+///     println!("{:?}", item);
+/// }
+/// ```
+///
+/// * and will get:
+///
+/// [10]
+/// [20]
+/// [30]
+/// [10, 20]
+/// [10, 30]
+/// [20, 30]
+/// [10,20, 30]
+pub fn combine_all<T: Clone>(list: &Vec<T>) -> Vec<Vec<T>> {
+    let mut res: Vec<Vec<T>> = Vec::new();
+
+    (0..list.len()).for_each(|n| combine(&list, n).into_iter().for_each(|v| res.push(v)));
+    res.push(list.clone());
+    res
+}
+
 fn permutate_index(cut_slice: usize) -> Vec<Vec<usize>> {
     if cut_slice <= 1 {
         vec![vec![0]]
