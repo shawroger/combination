@@ -8,13 +8,13 @@ combination is a lib to do math jobs like permutate and combinate data from vec.
 
 ```rust
 extern crate combination;
-use combination::permutate::*;
+use combination::*;
 
 #[test]
 #[cfg(test)]
 fn test_permutation() {
     let data = vec![10, 20, 30, 40];
-    let val = permutate_vec(&data);
+    let val = permutate(&data);
     for item in val {
        println!("{:?}", item);
     }
@@ -56,8 +56,8 @@ Get permutation data from a vec
 
 ```rust
 extern crate combination;
-use combination::permutate::_;
-let val = permutate_vec(&vec![10, 20, 30, 40]);
+use combination::*;
+let val = permutate(&vec![10, 20, 30, 40]);
 for item in val {
     println!("{:?}", item);
 }
