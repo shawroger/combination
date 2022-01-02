@@ -4,7 +4,7 @@
 //! ```rust
 //! use combination::*;
 //! fn test_permutation() {
-//!     let val = permutate(&vec![10, 20, 30, 40]);
+//!     let val = permutate::from_vec(&vec![10, 20, 30, 40]);
 //!     for item in val {
 //!        println!("{:?}", item);
 //!     }

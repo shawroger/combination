@@ -46,7 +46,7 @@ pub fn index(size: usize, combine_len: usize) -> Vec<Vec<usize>> {
 /// * for example
 /// ``` rust
 /// use combination::*;
-/// let val = combine(&vec![10, 20, 30, 40], 2);
+/// let val = combine::from_vec_at(&vec![10, 20, 30, 40], 2);
 /// for item in val {
 ///     println!("{:?}", item);
 /// }
@@ -54,13 +54,14 @@ pub fn index(size: usize, combine_len: usize) -> Vec<Vec<usize>> {
 ///
 /// * and will get:
 ///
+/// ```
 /// [10, 20]
 /// [10, 30]
 /// [10, 40]
 /// [20, 30]
 /// [20, 40]
 /// [30, 40]
-///
+/// ```
 pub fn from_vec_at<T: Clone>(tgt: &Vec<T>, size: usize) -> Vec<Vec<T>> {
     let mut res: Vec<Vec<T>> = Vec::new();
     let temp = index(tgt.len(), size);
@@ -76,7 +77,7 @@ pub fn from_vec_at<T: Clone>(tgt: &Vec<T>, size: usize) -> Vec<Vec<T>> {
 /// * for example
 /// ``` rust
 /// use combination::*;
-/// let val = combine_all(&vec![10, 20, 30]);
+/// let val = combine::from_vec(&vec![10, 20, 30]);
 /// for item in val {
 ///     println!("{:?}", item);
 /// }
@@ -84,13 +85,15 @@ pub fn from_vec_at<T: Clone>(tgt: &Vec<T>, size: usize) -> Vec<Vec<T>> {
 ///
 /// * and will get:
 ///
+/// ```
 /// [10]
 /// [20]
 /// [30]
 /// [10, 20]
 /// [10, 30]
 /// [20, 30]
-/// [10,20, 30]
+/// [10, 20, 30]
+/// ```
 pub fn from_vec<T: Clone>(list: &Vec<T>) -> Vec<Vec<T>> {
     let mut res: Vec<Vec<T>> = Vec::new();
 
