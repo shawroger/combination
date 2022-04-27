@@ -2,10 +2,12 @@
 authors = ["shawroger <roger@shawroger.com>"]
 description = "A lib to do math jobs like permutate and combinate data from vec."
 documentation = "https://docs.rs/combination/"
-edition = "2018"
+edition = "2021"
 license = "MIT/Apache-2.0"
 name = "combination"
 repository = "https://github.com/shawroger/combination.git"
-version = "0.1.5"
+version = "0.2.0"
 
-[dependencies]
+[features]
+default = ["v2"]
+v2 = []

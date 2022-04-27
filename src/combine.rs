@@ -54,14 +54,14 @@ pub fn index(size: usize, combine_len: usize) -> Vec<Vec<usize>> {
 ///
 /// * and will get:
 ///
-/// ```
+///```text
 /// [10, 20]
 /// [10, 30]
 /// [10, 40]
 /// [20, 30]
 /// [20, 40]
 /// [30, 40]
-/// ```
+///```
 pub fn from_vec_at<T: Clone>(tgt: &Vec<T>, size: usize) -> Vec<Vec<T>> {
     let mut res: Vec<Vec<T>> = Vec::new();
     let temp = index(tgt.len(), size);
@@ -85,7 +85,7 @@ pub fn from_vec_at<T: Clone>(tgt: &Vec<T>, size: usize) -> Vec<Vec<T>> {
 ///
 /// * and will get:
 ///
-/// ```
+///```text
 /// [10]
 /// [20]
 /// [30]
@@ -93,7 +93,7 @@ pub fn from_vec_at<T: Clone>(tgt: &Vec<T>, size: usize) -> Vec<Vec<T>> {
 /// [10, 30]
 /// [20, 30]
 /// [10, 20, 30]
-/// ```
+///```
 pub fn from_vec<T: Clone>(list: &Vec<T>) -> Vec<Vec<T>> {
     let mut res: Vec<Vec<T>> = Vec::new();
 

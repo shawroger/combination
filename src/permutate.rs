@@ -41,7 +41,7 @@ pub fn index(size: usize) -> Vec<Vec<usize>> {
 ///
 /// * and will get:
 ///
-/// ```
+///```text
 /// [40, 30, 10, 20]
 /// [30, 40, 10, 20]
 /// [30, 10, 40, 20]
@@ -66,7 +66,7 @@ pub fn index(size: usize) -> Vec<Vec<usize>> {
 /// [20, 40, 10, 30]
 /// [20, 10, 40, 30]
 /// [20, 10, 30, 40]
-/// ```
+///```
 
 pub fn from_vec<T: Clone>(tgt: &Vec<T>) -> Vec<Vec<T>> {
     let mut res: Vec<Vec<T>> = Vec::new();
