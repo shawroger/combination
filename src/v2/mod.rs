@@ -30,10 +30,12 @@
 
 mod internal;
 
+mod all_dislocation;
 mod combine;
 mod permutate;
 mod select;
 
+pub use all_dislocation::AllDislocation;
 pub use combine::Combine;
 pub use permutate::Permutate;
 pub use select::{InsufficientSize, Select, Selector};

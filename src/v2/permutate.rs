@@ -4,36 +4,32 @@ use super::{internal::p, select::Selector};
 ///
 /// a select_list generator
 ///
-/// it can create Vec<SelectList> as permutate mode
+/// it can create Vec<Vec<usize>> as permutate mode
 #[derive(Debug)]
 pub struct Permutate(usize, usize);
 
+impl Permutate {
+    /// # new
+    ///
+    /// create a `Permutate` struct
+    pub fn new(element_size: usize, group_size: usize) -> Self {
+        Self(element_size, group_size)
+    }
+}
+
 impl Selector for Permutate {
-    /// it will return a list of SelectList
+    /// it will return a list of Vec<usize>
     ///
     /// # Example
     /// ```
     /// let permutate = Permutate::new(3, 2);
     /// let select_list = vec![
-    ///     SelectList::from([0, 1]),
-    ///     SelectList::from([0, 2]),
-    ///     SelectList::from([1, 2]),
+    ///     [0, 1], [1, 0], [0, 2], [2, 0], [1, 2], [2, 1]
     /// ];
     /// ```
     /// the two above are same in value
     ///
     fn select_mode(&self) -> Vec<Vec<usize>> {
         p(self.0, self.1).into_iter().map(|v| v.into()).collect()
-    }
-}
-
-impl Permutate {
-    /// # new
-    ///
-    /// group_size must less than element_size
-    ///
-    /// or it will return an error
-    pub fn new(element_size: usize, group_size: usize) -> Self {
-        Self(element_size, group_size)
     }
 }

@@ -2,7 +2,17 @@
 ///
 /// it means that the index of select_list is over the element list length
 #[derive(Debug)]
-pub struct InsufficientSize;
+pub struct InsufficientSize {
+    _err_index: usize,
+}
+
+impl InsufficientSize {
+    pub fn new(err_index: usize) -> Self {
+        Self {
+            _err_index: err_index,
+        }
+    }
+}
 
 /// # Select
 ///
@@ -34,27 +44,30 @@ pub trait Select<T> {
     ///
     /// it will return errortype
     fn try_select<U: Selector>(&self, select_group: &U) -> Result<Vec<Vec<&T>>, InsufficientSize> {
-        let res: Vec<Result<Vec<&T>, ()>> = select_group
+        let res: Vec<Result<Vec<&T>, usize>> = select_group
             .select_mode()
             .into_iter()
             .map(|list| {
-                if self.select_one_list(&list).iter().any(|v| v.is_none()) {
-                    Err(())
-                } else {
-                    Ok(self
+                match self
+                    .select_one_list(&list)
+                    .iter()
+                    .enumerate()
+                    .find(|(_, v)| v.is_none())
+                {
+                    Some((index, _)) => Err(index),
+                    None => Ok(self
                         .select_one_list(&list)
                         .into_iter()
                         .map(|v| v.unwrap())
-                        .collect::<Vec<&T>>())
+                        .collect::<Vec<&T>>()),
                 }
             })
             .collect();
 
-        if res.iter().any(|list| list.is_err()) {
-            return Err(InsufficientSize);
+        match res.iter().enumerate().find(|(_, v)| v.is_err()) {
+            Some((index, _)) => Err(InsufficientSize::new(index)),
+            None => Ok(res.into_iter().map(|list| list.unwrap()).collect()),
         }
-
-        Ok(res.into_iter().map(|list| list.unwrap()).collect())
     }
 }
 
@@ -143,8 +156,7 @@ mod test {
     #[test]
     fn test_custom_selector() {
         let str_list = ["hi", "i", "am", "roger", "and", "you"];
-        let custom_selector = CustomSelector;
-        let res = str_list.try_select(&custom_selector).unwrap();
+        let res = str_list.try_select(&CustomSelector).unwrap();
 
         println!("{:#?}", res);
     }

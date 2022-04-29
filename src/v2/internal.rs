@@ -68,7 +68,7 @@ pub fn p(element_size: usize, group_size: usize) -> Vec<Vec<usize>> {
     let starter = (0..element_size).into_iter().collect();
 
     // no need check unwrap
-    // fn _cc do it
+    // fn _c do it
     _c(&starter, group_size).into_iter().for_each(|(list, _)| {
         permutate.iter().for_each(|select_list| {
             res.push(
@@ -82,6 +82,17 @@ pub fn p(element_size: usize, group_size: usize) -> Vec<Vec<usize>> {
     });
 
     res
+}
+
+fn _a_unaccept(list: &Vec<usize>) -> bool {
+    !list.iter().enumerate().any(|(v, &i)| v == i)
+}
+
+pub fn a(size: usize) -> Vec<Vec<usize>> {
+    _p(size)
+        .into_iter()
+        .filter(|list| _a_unaccept(list))
+        .collect()
 }
 
 #[cfg(test)]
@@ -100,6 +111,14 @@ mod test {
     #[test]
     fn test_p() {
         let res = p(2, 3);
+        for v in res {
+            println!("{:?}", v);
+        }
+    }
+
+    #[test]
+    fn test_a() {
+        let res = a(4);
         for v in res {
             println!("{:?}", v);
         }

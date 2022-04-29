@@ -4,32 +4,28 @@ use super::{internal::c, select::Selector};
 ///
 /// a select_list generator
 ///
-/// it can create Vec<SelectList> as combine mode
+/// it can create Vec<Vec<usize>> as combine mode
 #[derive(Debug)]
 pub struct Combine(usize, usize);
 
 impl Combine {
     /// # new
     ///
-    /// group_size must less than element_size
-    ///
-    /// or it will return an error
+    /// create a `Combine` struct
     pub fn new(element_size: usize, group_size: usize) -> Self {
         Self(element_size, group_size)
     }
 }
 
 impl Selector for Combine {
-    /// it will return a list of SelectList
+    /// it will return a list of Vec<usize>
     ///
     /// # Example
     /// ```
     /// use crate::v2::*;
     /// let combine = Combine::new(3, 2);
     /// let select_list = vec![
-    ///     SelectList::from([0, 1]),
-    ///     SelectList::from([0, 2]),
-    ///     SelectList::from([1, 2]),
+    ///      [0, 1], [0, 2], [1, 2],
     /// ];
     /// ```
     /// the two above are same in value
