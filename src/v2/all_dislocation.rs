@@ -35,6 +35,7 @@ use super::{internal::a, Selector};
 ///
 /// it will turn `a` as `[1, 0]`, means `1` in posotion 0, and `0` in posotion 1
 ///
+#[derive(Debug)]
 pub struct AllDislocation(usize);
 
 impl AllDislocation {

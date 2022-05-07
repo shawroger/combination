@@ -14,6 +14,47 @@ impl InsufficientSize {
     }
 }
 
+/// # Selector
+///
+/// by implement this trait, then make any type as a selector
+///
+/// pass this for the list, it can select value as this mode
+///
+/// # Example
+/// ```
+///struct CustomSelector;
+///
+///impl Selector for CustomSelector {
+///   fn select_mode(&self) -> Vec<Vec<usize>> {
+///       vec![vec![0, 0, 0], vec![1, 1, 1], vec![2, 2, 2]]
+///   }
+///}
+///fn test_custom_selector() {
+///   let str_list = ["how", "are", "u"];
+///   let custom_selector = CustomSelector;
+///   let res = str_list.try_select(&custom_selector).unwrap();
+///
+///   for v in res {
+///      println!("{:#?}", v);
+///   }
+///}
+///```
+///
+/// it will be
+///
+///
+/// ```
+/// [
+///     ["how", "how", "how"],
+///     ["are", "are", "are"],
+///     ["u", "u", "u"]
+/// ]
+///
+/// ```
+pub trait Selector {
+    fn select_mode(&self) -> Vec<Vec<usize>>;
+}
+
 /// # Select
 ///
 /// this trait can allow any type select any ref from itself
@@ -71,48 +112,13 @@ pub trait Select<T> {
     }
 }
 
-/// # Selector
-///
-/// by implement this trait, then make any type as a selector
-///
-/// pass this for the list, it can select value as this mode
-///
-/// # Example
-/// ```
-///struct CustomSelector;
-///
-///impl Selector for CustomSelector {
-///   fn select_mode(&self) -> Vec<Vec<usize>> {
-///       vec![vec![0, 0, 0], vec![1, 1, 1], vec![2, 2, 2]]
-///   }
-///}
-///fn test_custom_selector() {
-///   let str_list = ["how", "are", "u"];
-///   let custom_selector = CustomSelector;
-///   let res = str_list.try_select(&custom_selector).unwrap();
-///
-///   for v in res {
-///      println!("{:#?}", v);
-///   }
-///}
-///```
-///
-/// it will be
-///
-///
-/// ```
-/// [
-///     ["how", "how", "how"],
-///     ["are", "are", "are"],
-///     ["u", "u", "u"]
-/// ]
-///
-/// ```
-pub trait Selector {
-    fn select_mode(&self) -> Vec<Vec<usize>>;
+impl<T, const N: usize> Select<T> for [T; N] {
+    fn select_one_list(&self, select_list: &[usize]) -> Vec<Option<&T>> {
+        select_list.iter().map(|&i| self.get(i)).collect()
+    }
 }
 
-macro_rules! _impl_select_for_list {
+macro_rules! select_impl {
     ($b:ident, $t:ty) => {
         impl<$b> Select<$b> for $t {
             fn select_one_list(&self, select_list: &[usize]) -> Vec<Option<&T>> {
@@ -122,12 +128,12 @@ macro_rules! _impl_select_for_list {
     };
 
     ($b:ident, $($t:ty),*) => {
-       $(_impl_select_for_list!($b, $t);)*
+       $(select_impl!($b, $t);)*
     };
 }
 
 // implement Select trait
-_impl_select_for_list!(T, &[T], Vec<T>, [T]);
+select_impl!(T, &[T], Vec<T>, [T]);
 
 #[cfg(test)]
 mod test {
