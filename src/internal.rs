@@ -1,4 +1,7 @@
-use super::select::Select;
+//! # Internal functions
+//!
+//! This module provides internal functions which calcuate different type of combinations and arrangements.
+//!
 
 fn _c(starter: &Vec<usize>, group: usize) -> Vec<(Vec<usize>, usize)> {
     let starter_len = starter.len();
@@ -63,6 +66,7 @@ pub fn c(element_size: usize, group: usize) -> Vec<Vec<usize>> {
 }
 
 pub fn p(element_size: usize, group_size: usize) -> Vec<Vec<usize>> {
+    use super::select::Select;
     let mut res = vec![];
     let permutate = _p(group_size);
     let starter = (0..element_size).into_iter().collect();
